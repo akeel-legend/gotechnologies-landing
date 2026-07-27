@@ -37,11 +37,14 @@ npm run lint         # eslint (next/core-web-vitals)
 npm run typecheck    # tsc --noEmit
 ```
 
-> Note: this project was scaffolded and its source files written in a
-> network-restricted sandbox that could not reach the npm registry, so
-> `npm install` / `npm run build` / `npm run lint` have **not** been run
-> yet. Run them locally as the first step — see "First-run checklist"
-> below.
+> Note: this project has been validated with `npm install`, `npm run
+> typecheck` and `npm run lint` — all pass with no errors. `npm run
+> build` could **not** be verified in the sandbox this was built in: that
+> sandbox's `node_modules` is missing the native `@next/swc-linux-arm64-gnu`
+> binary, and its restricted network access (403s on the npm registry
+> beyond initial install) prevents fetching it. This is a limitation of
+> that specific build environment, not a code issue. Run `npm run build`
+> locally as the next step — see "First-run checklist" below.
 
 ## First-run checklist
 
@@ -83,13 +86,17 @@ app/
   layout.tsx        Root layout: fonts, <head> metadata, Header/Footer/Analytics
   page.tsx           Assembles the one-page site from section components
   globals.css        Tailwind entry + a couple of base rules
-  sitemap.ts         Generates sitemap.xml at build time
+  sitemap.ts         Generates sitemap.xml at build time (incl. /privacy, /terms)
   robots.ts          Generates robots.txt at build time
+  not-found.tsx       Custom 404 page
+  privacy/page.tsx    Initial privacy policy
+  terms/page.tsx      Initial terms and conditions
 components/
   layout/            Header, Footer, Container
   sections/          Hero, CompanyOverview, ProductShowcase, About, Audiences, ContactSection
-  ui/                 Button, SectionHeading (small reusable primitives)
+  ui/                 Button, SectionHeading, Eyebrow (small reusable primitives)
   ContactForm.tsx     Client component, posts to Formspree
+  PolicyPage.tsx       Shared chrome for /privacy and /terms
   Analytics.tsx        Env-var-gated Plausible/GA4 loader
   RouteIllustration.tsx  Decorative SVG using the brand's "route grammar"
 lib/
@@ -97,6 +104,10 @@ lib/
 public/
   logo/               Brand PNG assets (corporate + GoChauffeur lockups, symbol)
   favicon.ico, icon-*.png, og-image.png   Generated from the brand app icon
+docs/
+  site-requirements.md, information-architecture.md, design-direction.md,
+  content-structure.md, implementation-plan.md — requirements and design
+  record for this site; read these before making structural changes
 ```
 
 ## Environment variables
@@ -150,6 +161,10 @@ Go Technologies lean-MVP principle:
 - No CMS — copy is in `lib/site-config.ts` as plain TypeScript.
 - No blog/careers sub-pages yet — the partners/careers section is a
   single on-page block routing everyone to one contact form.
-- No privacy policy / terms pages yet — add these before any paid
-  marketing spend or data collection beyond the contact form.
 - No component library / Storybook — see brand guide "Later — scale".
+
+`/privacy` and `/terms` do exist (added to close a gap against the full
+site spec) but are deliberately an initial, good-faith version scoped to
+what this marketing site does today. Get a legal review before relying on
+them for anything beyond the current contact-form-only scope — see
+`docs/implementation-plan.md`, "Recommended next steps."

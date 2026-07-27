@@ -12,7 +12,9 @@ import { useEffect, useRef, useState, type HTMLAttributes, type ReactNode } from
 type ParallaxLayerProps = {
   speed?: number;
   className?: string;
-  children: ReactNode;
+  // Optional: several usages are purely decorative (a blurred glow blob
+  // styled entirely via `className`), with no content of their own.
+  children?: ReactNode;
 } & Omit<HTMLAttributes<HTMLDivElement>, 'className' | 'children' | 'style'>;
 
 export function ParallaxLayer({

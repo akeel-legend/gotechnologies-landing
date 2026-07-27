@@ -33,6 +33,21 @@ export function Footer() {
               </ul>
             </div>
             <div>
+              <p className="font-mono text-eyebrow text-white/50">Legal</p>
+              <ul className="mt-4 space-y-3">
+                <li>
+                  <a href="/privacy/" className="text-body text-white/60 hover:text-white">
+                    Privacy
+                  </a>
+                </li>
+                <li>
+                  <a href="/terms/" className="text-body text-white/60 hover:text-white">
+                    Terms
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
               <p className="font-mono text-eyebrow text-white/50">Contact</p>
               <ul className="mt-4 space-y-3 text-body text-white/60">
                 <li>
