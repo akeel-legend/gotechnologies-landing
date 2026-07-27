@@ -1,29 +1,30 @@
 import Image from 'next/image';
 import { Container } from '../layout/Container';
 import { Button } from '../ui/Button';
+import { Eyebrow } from '../ui/Eyebrow';
 import { ParallaxLayer } from '../motion/Parallax';
 import { Reveal } from '../motion/Reveal';
 import { gochauffeur } from '@/lib/site-config';
 
 export function ProductShowcase() {
   return (
-    <section id="gochauffeur" className="relative overflow-hidden bg-midnight py-20 md:py-28">
+    <section id="gochauffeur" className="divider relative overflow-hidden bg-teal-deep py-20 md:py-28">
       <ParallaxLayer
         speed={-0.1}
-        className="pointer-events-none absolute -top-16 right-10 h-64 w-64 rounded-full bg-teal/20 blur-3xl"
+        className="pointer-events-none absolute -top-16 right-10 h-64 w-64 rounded-full bg-teal/25 blur-3xl"
         aria-hidden="true"
       />
       <ParallaxLayer
         speed={0.14}
-        className="pointer-events-none absolute -bottom-20 left-10 h-72 w-72 rounded-full bg-gold/15 blur-3xl"
+        className="pointer-events-none absolute -bottom-20 left-10 h-72 w-72 rounded-full bg-gold/20 blur-3xl"
         aria-hidden="true"
       />
 
       <Container className="relative">
         <Reveal>
-          <div className="grid gap-12 rounded-card bg-white/[0.03] p-8 ring-1 ring-white/10 md:grid-cols-2 md:p-14">
+          <div className="grid gap-12 rounded-card bg-black/15 p-8 ring-1 ring-white/10 md:grid-cols-2 md:p-14">
             <div>
-              <p className="text-ui-label uppercase tracking-wide text-gold">Flagship product</p>
+              <Eyebrow tone="gold">Flagship product</Eyebrow>
               <Image
                 src="/logo/wordmark-white.png"
                 alt={gochauffeur.name}
@@ -54,12 +55,10 @@ export function ProductShowcase() {
               </div>
             </div>
 
-            <div className="flex flex-col justify-center rounded-card bg-midnight/60 p-8 ring-1 ring-white/10">
+            <div className="flex flex-col justify-center rounded-card bg-black/20 p-8 ring-1 ring-white/10">
               <p className="text-ui-label text-gold">{gochauffeur.status.label}</p>
               <p className="mt-3 text-body text-white/75">{gochauffeur.status.body}</p>
-              <p className="mt-6 text-caption uppercase tracking-wide text-white/40">
-                Campaign line
-              </p>
+              <p className="mt-6 font-mono text-eyebrow text-white/40">Campaign line</p>
               <p className="mt-1 text-body text-white/70">&ldquo;{gochauffeur.campaignLine}&rdquo;</p>
             </div>
           </div>

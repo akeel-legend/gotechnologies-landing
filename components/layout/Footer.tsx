@@ -4,7 +4,7 @@ import { nav, company, contact, footer } from '@/lib/site-config';
 
 export function Footer() {
   return (
-    <footer className="bg-midnight text-white/70">
+    <footer className="divider bg-midnight text-white/70">
       <Container className="py-16">
         <div className="flex flex-col gap-12 md:flex-row md:justify-between">
           <div className="max-w-sm">
@@ -21,7 +21,7 @@ export function Footer() {
 
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
             <div>
-              <p className="text-ui-label text-white">Company</p>
+              <p className="font-mono text-eyebrow text-white/50">Company</p>
               <ul className="mt-4 space-y-3">
                 {nav.map((item) => (
                   <li key={item.href}>
@@ -33,7 +33,7 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <p className="text-ui-label text-white">Contact</p>
+              <p className="font-mono text-eyebrow text-white/50">Contact</p>
               <ul className="mt-4 space-y-3 text-body text-white/60">
                 <li>
                   <a href={`mailto:${contact.fallbackEmail}`} className="hover:text-white">

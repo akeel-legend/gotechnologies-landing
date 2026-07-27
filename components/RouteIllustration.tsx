@@ -23,27 +23,27 @@ export function RouteIllustration({ className = '' }: { className?: string }) {
       </defs>
 
       {/* Faint static base line so the route reads even if animation is reduced/unsupported */}
-      <use href="#go-route-path" stroke="#0D6F68" strokeOpacity="0.18" strokeWidth="2" />
+      <use href="#go-route-path" stroke="#7CB1AD" strokeOpacity="0.3" strokeWidth="2" />
 
       {/* Flowing dashes suggesting travel along the route */}
-      <use href="#go-route-path" stroke="#0D6F68" strokeOpacity="0.55" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="1 16">
+      <use href="#go-route-path" stroke="#7CB1AD" strokeOpacity="0.75" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="1 16">
         <animate attributeName="stroke-dashoffset" from="0" to="-170" dur="7s" repeatCount="indefinite" />
       </use>
 
       {/* Waypoint markers */}
-      <circle cx="180" cy="180" r="5" fill="#F5F8F7" stroke="#0D6F68" strokeWidth="2" />
-      <circle cx="320" cy="100" r="5" fill="#F5F8F7" stroke="#0D6F68" strokeWidth="2" />
+      <circle cx="180" cy="180" r="5" fill="#0B1F2A" stroke="#7CB1AD" strokeWidth="2" />
+      <circle cx="320" cy="100" r="5" fill="#0B1F2A" stroke="#7CB1AD" strokeWidth="2" />
 
       {/* Start point */}
-      <circle cx="40" cy="260" r="8" fill="#0D6F68" />
+      <circle cx="40" cy="260" r="8" fill="#7CB1AD" />
 
       {/* Traveller: a soft glow + solid dot moving the full length of the route */}
       <g>
         <animateMotion dur="4.5s" repeatCount="indefinite" rotate="auto">
           <mpath href="#go-route-path" />
         </animateMotion>
-        <circle r="11" fill="#0D6F68" opacity="0.18" />
-        <circle r="5.5" fill="#0D6F68" />
+        <circle r="12" fill="#7CB1AD" opacity="0.25" />
+        <circle r="5.5" fill="#7CB1AD" />
       </g>
 
       {/* Destination: pulsing gold waypoint */}

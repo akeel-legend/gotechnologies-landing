@@ -11,8 +11,10 @@ const base =
 
 const variants: Record<ButtonVariant, string> = {
   primary: 'bg-teal text-white hover:bg-teal-hover',
+  // Outline style for the dark-first page background (was a solid white
+  // pill designed for light sections; the site no longer has any).
   secondary:
-    'bg-white text-ink border border-mist hover:border-teal hover:text-teal',
+    'border border-white/30 text-white hover:border-white hover:bg-white/5',
   ghost: 'text-white/90 hover:text-white underline-offset-4 hover:underline',
 };
 

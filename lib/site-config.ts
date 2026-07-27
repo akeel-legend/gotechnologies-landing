@@ -104,7 +104,7 @@ export const about = {
 };
 
 export type Audience = {
-  key: string;
+  key: 'travellers' | 'chauffeurs' | 'partners' | 'investors';
   title: string;
   body: string;
   ctaLabel: string;

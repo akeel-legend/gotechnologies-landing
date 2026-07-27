@@ -3,20 +3,27 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
   scroll-behavior: smooth;
 }
 
 body {
-  @apply bg-cloud font-sans text-body text-ink;
+  @apply bg-midnight font-sans text-body text-white/80;
 }
 
 ::selection {
-  background-color: #0d6f6833;
+  background-color: #0d6f6866;
+  color: #ffffff;
 }
 
 /* Offset anchor scroll targets so the sticky header never covers the
    section heading when navigating via #hash links. */
 section[id] {
   scroll-margin-top: 5rem;
+}
+
+/* Hairline section dividers, used between major sections for the
+   editorial rhythm (see brand guide v1.1, "Corporate digital direction"). */
+.divider {
+  @apply border-t border-white/10;
 }

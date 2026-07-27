@@ -1,45 +1,39 @@
+import { Eyebrow } from './Eyebrow';
+
 type SectionHeadingProps = {
   eyebrow?: string;
+  eyebrowTone?: 'teal' | 'gold' | 'muted';
   title: string;
   body?: string;
   align?: 'left' | 'center';
-  tone?: 'light' | 'dark';
+  /** Set true only when this heading sits on a light accent card, not the dark page background. */
+  onLight?: boolean;
 };
 
 export function SectionHeading({
   eyebrow,
+  eyebrowTone = 'teal',
   title,
   body,
   align = 'left',
-  tone = 'light',
+  onLight = false,
 }: SectionHeadingProps) {
   const isCenter = align === 'center';
-  const isDark = tone === 'dark';
 
   return (
     <div className={`max-w-2xl ${isCenter ? 'mx-auto text-center' : ''}`}>
       {eyebrow ? (
-        <p
-          className={`text-ui-label uppercase tracking-wide ${
-            isDark ? 'text-gold' : 'text-teal'
-          }`}
-        >
+        <Eyebrow tone={eyebrowTone} className={isCenter ? 'justify-center' : ''}>
           {eyebrow}
-        </p>
+        </Eyebrow>
       ) : null}
       <h2
-        className={`mt-2 text-section-title ${
-          isDark ? 'text-white' : 'text-midnight'
-        }`}
+        className={`mt-3 text-section-title ${onLight ? 'text-midnight' : 'text-white'}`}
       >
         {title}
       </h2>
       {body ? (
-        <p
-          className={`mt-4 text-body leading-relaxed ${
-            isDark ? 'text-white/75' : 'text-ink/75'
-          }`}
-        >
+        <p className={`mt-4 text-body leading-relaxed ${onLight ? 'text-ink/75' : 'text-white/65'}`}>
           {body}
         </p>
       ) : null}

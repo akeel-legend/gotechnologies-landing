@@ -6,7 +6,7 @@ import { contact } from '@/lib/site-config';
 
 export function ContactSection() {
   return (
-    <section id="contact" className="bg-cloud py-20 md:py-28">
+    <section id="contact" className="divider bg-midnight py-20 md:py-28">
       <Container className="grid gap-12 md:grid-cols-[0.9fr_1.1fr] md:items-start">
         <Reveal>
           <SectionHeading eyebrow="Contact" title={contact.title} body={contact.body} />

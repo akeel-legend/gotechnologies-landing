@@ -9,15 +9,15 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-mist bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-white/10 bg-midnight/90 backdrop-blur">
       <Container className="flex h-20 items-center justify-between">
         <a href="#top" className="flex items-center" aria-label="Go Technologies home">
           <Image
-            src="/logo/corporate-dark.png"
+            src="/logo/corporate-white.png"
             alt="Go Technologies"
             width={700}
             height={300}
-            className="h-16 w-auto"
+            className="h-14 w-auto"
             priority
           />
         </a>
@@ -27,7 +27,7 @@ export function Header() {
             <a
               key={item.href}
               href={item.href}
-              className="text-ui-label text-ink/80 transition-colors hover:text-teal"
+              className="text-ui-label text-white/70 transition-colors hover:text-white"
             >
               {item.label}
             </a>
@@ -43,7 +43,7 @@ export function Header() {
 
         <button
           type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-control border border-mist md:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-control border border-white/20 md:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? 'Close menu' : 'Open menu'}
@@ -52,11 +52,11 @@ export function Header() {
           <span className="sr-only">Toggle navigation</span>
           {open ? (
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <path d="M4 4L16 16M16 4L4 16" stroke="#15252B" strokeWidth="2" strokeLinecap="round" />
+              <path d="M4 4L16 16M16 4L4 16" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" />
             </svg>
           ) : (
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <path d="M3 5H17M3 10H17M3 15H17" stroke="#15252B" strokeWidth="2" strokeLinecap="round" />
+              <path d="M3 5H17M3 10H17M3 15H17" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" />
             </svg>
           )}
         </button>
@@ -66,7 +66,7 @@ export function Header() {
         <nav
           id="mobile-nav"
           aria-label="Mobile"
-          className="border-t border-mist bg-white md:hidden"
+          className="border-t border-white/10 bg-midnight md:hidden"
         >
           <Container className="flex flex-col gap-1 py-4">
             {nav.map((item) => (
@@ -74,7 +74,7 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="rounded-control px-2 py-3 text-ui-label text-ink/80 hover:bg-cloud hover:text-teal"
+                className="rounded-control px-2 py-3 text-ui-label text-white/70 hover:bg-white/5 hover:text-white"
               >
                 {item.label}
               </a>
