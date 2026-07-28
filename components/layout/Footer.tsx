@@ -46,7 +46,7 @@ export function Footer() {
             alt="Go Technologies"
             width={700}
             height={300}
-            className="h-8 w-auto"
+            className="h-14 w-auto"
           />
 
           <nav aria-label="Footer" className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">

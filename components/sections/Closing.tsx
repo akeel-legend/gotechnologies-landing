@@ -16,7 +16,7 @@ export function Closing() {
             alt="Go Technologies"
             width={700}
             height={300}
-            className="mx-auto mt-9 h-8 w-auto"
+            className="mx-auto mt-9 h-14 w-auto"
           />
           <p className="mt-3 text-caption text-cream/50">{closing.wordmarkLine}</p>
         </Reveal>

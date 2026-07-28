@@ -17,7 +17,7 @@ export function Header() {
             alt="Go Technologies"
             width={700}
             height={300}
-            className="h-9 w-auto sm:h-10"
+            className="h-14 w-auto sm:h-16"
             priority
           />
         </a>
