@@ -1,75 +1,80 @@
 import type { Config } from 'tailwindcss';
 
-// Tokens sourced from GoChauffeur + Go Technologies Brand Guidelines v1.1
-// (see docs update: "Corporate digital direction" addendum). Do not add
-// new brand colors here without updating the guidelines doc first.
+// Tokens for the "warm editorial" direction — see docs/design-direction.md,
+// "Pivot to warm editorial" for the rationale and the decision to
+// supersede the earlier dark-first v1.1 palette below it.
 //
-// v1.1 note: the corporate site (this repo) moved to a dark-first,
-// editorial visual direction -- bigger/bolder type, a monospace label
-// convention, and a small "card accent" palette. The accent colors below
-// are *not* new brand hues: they are documented tint/shade steps of
-// Ceylon Teal and Journey Gold (see the brand guide's colour ramp table),
-// chosen specifically because they stay legible with dark Ink text and
-// read as light, saturated patches against the Midnight page background.
-// GoChauffeur's own product surfaces are unaffected by this change.
+// Colour values were sampled directly from the approved mockup (see
+// docs/site-copy.md) rather than invented, so this file is the compiled
+// version of that visual reference, not a fresh guess.
 //
 // Note: Tailwind's default 0.25rem-based spacing scale already lines up
-// with the brand's 4px base scale (1=4px, 2=8px, 3=12px, 4=16px, 6=24px,
-// 8=32px, 12=48px, 16=64px, 24=96px), so spacing is intentionally left
-// at Tailwind defaults rather than redefined.
+// with the brand's 4px base scale, so spacing is intentionally left at
+// Tailwind defaults rather than redefined.
 
 const config: Config = {
   content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
   theme: {
     extend: {
       colors: {
-        teal: {
-          DEFAULT: '#0D6F68', // Ceylon Teal - primary action / Go wordmark
-          hover: '#0A5A55',
-          deep: '#073A36', // Teal-800: full-bleed section backgrounds (e.g. product showcase)
+        cream: '#FBF8F3', // Default page background (warm ivory)
+        card: '#F4EEE1', // Slightly deeper cream, for cards/panels on the cream page
+        forest: {
+          DEFAULT: '#0C2A1F', // Primary action colour / dark surfaces (buttons, footer, closing band)
+          hover: '#0A2118',
         },
-        midnight: '#0B1F2A', // Default page background (dark-first) / headings on light panels
-        gold: '#D8A344', // Journey Gold - waypoints / premium accent (never body text)
-        cloud: '#F5F8F7', // Light panels (used sparingly against the dark page)
-        mist: '#E4ECEA', // Dividers / icons on light panels
-        ink: '#15252B', // Text on light/accent surfaces
+        ink: '#14201A', // Headline + body text on the cream page
+        stone: '#5B584F', // Secondary/paragraph text, warmer than pure grey
+        line: '#E7DFCE', // Hairline dividers / card borders on cream
+        gold: '#A87D3A', // Eyebrow labels, dashes, small accents — never large surfaces or body text
+        // Legacy dark-first tokens, kept only so any not-yet-migrated
+        // component doesn't hard-crash; do not use these in new work.
+        teal: {
+          DEFAULT: '#0D6F68',
+          hover: '#0A5A55',
+          deep: '#073A36',
+        },
+        midnight: '#0B1F2A',
+        cloud: '#F5F8F7',
+        mist: '#E4ECEA',
         accent: {
-          // Card-accent palette: tints of Teal (sage/teal) and Gold
-          // (tan/amber). All pass WCAG AA with Ink text (>=6.5:1).
-          sage: '#A8CBC9', // Teal tint 200
-          teal: '#7CB1AD', // Teal tint 300
-          tan: '#EACD9A', // Gold tint 300
-          amber: '#E1B971', // Gold tint 400
+          sage: '#A8CBC9',
+          teal: '#7CB1AD',
+          tan: '#EACD9A',
+          amber: '#E1B971',
         },
       },
       fontFamily: {
+        // Fraunces for editorial serif headlines (the mockup's display
+        // type), Inter for body copy and UI labels.
+        serif: ['var(--font-fraunces)', 'Georgia', 'serif'],
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       fontSize: {
         hero: [
-          'clamp(2.75rem, 1.9rem + 4.2vw, 6.75rem)',
-          { lineHeight: '0.98', fontWeight: '800', letterSpacing: '-0.02em' },
+          'clamp(2.5rem, 1.9rem + 3vw, 4.5rem)',
+          { lineHeight: '1.05', fontWeight: '500', letterSpacing: '-0.01em' },
         ],
         'page-title': [
-          'clamp(2.25rem, 1.8rem + 2vw, 3.75rem)',
-          { lineHeight: '1.02', fontWeight: '800', letterSpacing: '-0.015em' },
+          'clamp(2rem, 1.6rem + 1.8vw, 3rem)',
+          { lineHeight: '1.08', fontWeight: '500', letterSpacing: '-0.01em' },
         ],
         'section-title': [
-          'clamp(1.875rem, 1.55rem + 1.5vw, 3.25rem)',
-          { lineHeight: '1.04', fontWeight: '800', letterSpacing: '-0.01em' },
+          'clamp(1.75rem, 1.45rem + 1.3vw, 2.75rem)',
+          { lineHeight: '1.1', fontWeight: '500', letterSpacing: '-0.005em' },
         ],
-        body: ['1.0625rem', { lineHeight: '1.6', fontWeight: '400' }],
-        'ui-label': ['0.9375rem', { lineHeight: '1.3', fontWeight: '600' }],
-        eyebrow: ['0.8125rem', { lineHeight: '1.3', fontWeight: '500', letterSpacing: '0.03em' }],
+        body: ['1.0625rem', { lineHeight: '1.65', fontWeight: '400' }],
+        'ui-label': ['0.9375rem', { lineHeight: '1.3', fontWeight: '500' }],
+        eyebrow: ['0.8125rem', { lineHeight: '1.3', fontWeight: '600', letterSpacing: '0.08em' }],
         caption: ['0.8125rem', { lineHeight: '1.4', fontWeight: '400' }],
       },
       borderRadius: {
-        control: '12px',
-        card: '24px',
+        control: '999px', // pill buttons throughout the warm-editorial direction
+        card: '20px',
       },
       boxShadow: {
-        card: '0 1px 2px rgba(11, 31, 42, 0.04), 0 8px 24px rgba(11, 31, 42, 0.06)',
+        card: '0 1px 2px rgba(20, 32, 26, 0.04), 0 12px 32px rgba(20, 32, 26, 0.06)',
       },
       maxWidth: {
         content: '1180px',

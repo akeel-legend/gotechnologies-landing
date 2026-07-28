@@ -109,7 +109,7 @@ export default function TermsPage() {
           Questions about these terms can be sent to{' '}
           <a
             href={`mailto:${contact.fallbackEmail}`}
-            className="text-teal underline underline-offset-4 hover:text-white"
+            className="text-forest underline underline-offset-4 hover:text-ink"
           >
             {contact.fallbackEmail}
           </a>

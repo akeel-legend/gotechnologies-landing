@@ -30,7 +30,7 @@ export default function PrivacyPage() {
 
       <PolicySection title="2. Information we collect">
         <p>
-          <strong className="text-white/85">Contact form.</strong> When you
+          <strong className="text-ink/85">Contact form.</strong> When you
           submit the contact form, we collect the name, email address,
           stated interest (traveller, chauffeur/vehicle partner, travel
           agency/hotel partner, investor, careers, or other) and message
@@ -39,7 +39,7 @@ export default function PrivacyPage() {
           via a direct email you send us.
         </p>
         <p>
-          <strong className="text-white/85">Analytics (optional).</strong>{' '}
+          <strong className="text-ink/85">Analytics (optional).</strong>{' '}
           If enabled, this site may use privacy-focused analytics
           (Plausible) or Google Analytics 4 to understand aggregate
           traffic, such as which pages are visited and general geographic
@@ -116,7 +116,7 @@ export default function PrivacyPage() {
         <p>
           Questions about this policy, or requests to access or delete
           information you&apos;ve submitted, can be sent to{' '}
-          <a href={`mailto:${contact.fallbackEmail}`} className="text-teal underline underline-offset-4 hover:text-white">
+          <a href={`mailto:${contact.fallbackEmail}`} className="text-forest underline underline-offset-4 hover:text-ink">
             {contact.fallbackEmail}
           </a>
           .

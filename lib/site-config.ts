@@ -1,10 +1,15 @@
 // Central copy and content config for the Go Technologies corporate site.
-// Sourced from GoChauffeur + Go Technologies Brand Guidelines v1.0 (July
-// 2026): sections 01 (brand decision), 02 (brand foundation), 04 (naming
-// and messaging hierarchy) and 15 (copy examples). Keep claims here
-// consistent with the "claims control" rule in section 15 -- do not add
-// "verified", "instant", "24/7" etc. without a documented operating
-// definition behind them.
+// Source of truth for wording is docs/site-copy.md — edit copy there first,
+// then mirror the change here. Keep claims consistent with the "claims
+// control" rule documented in that file: do not add "verified", "instant",
+// "24/7", "guaranteed" etc. without a documented operating definition.
+//
+// v2.0 note: this file was rebuilt to match the warm-editorial visual
+// direction (see docs/design-direction.md, "Pivot to warm editorial").
+// Some fields from the prior dark-first pass (foundation/personality/
+// audiences) were retired because the new copy and layout superseded them
+// — see docs/site-copy.md's "reconciliation" section for what changed and
+// why, rather than assuming this is an oversight.
 
 export const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? 'https://gotechnologies.lk';
@@ -12,135 +17,164 @@ export const siteUrl =
 export const company = {
   legalName: 'Go Technologies (Private) Limited',
   shortName: 'Go Technologies',
-  descriptor: 'Digital platforms for connected journeys.',
+  descriptor: 'Technology for journeys that matter.',
   location: 'Colombo, Sri Lanka',
 };
 
 export const nav = [
   { label: 'Company', href: '#company' },
+  { label: 'Ventures', href: '#ventures' },
   { label: 'GoChauffeur', href: '#gochauffeur' },
-  { label: 'About', href: '#about' },
-  { label: 'Partners & careers', href: '#partners' },
   { label: 'Contact', href: '#contact' },
 ];
 
+export const primaryCta = { label: 'Discover GoChauffeur', href: '#gochauffeur' };
+
 export const hero = {
-  eyebrow: 'Go Technologies',
-  headline: 'Digital platforms for connected journeys.',
-  body:
-    'We build trusted, technology-driven marketplaces for travel -- starting with GoChauffeur, a pre-booked chauffeur platform for Sri Lanka’s inbound tourism, designed from day one to scale to other journeys and other markets.',
-  primaryCta: { label: 'Explore GoChauffeur', href: '#gochauffeur' },
-  secondaryCta: { label: 'Partner with us', href: '#partners' },
-};
-
-export const foundation = {
-  purpose: {
-    title: 'Purpose',
-    body: 'Make professionally planned travel easier to discover, compare and arrange.',
-  },
-  promise: {
-    title: 'Promise',
-    body: 'Clear choices, capable people and dependable confirmation, on every platform we build.',
-  },
-  positioning: {
-    title: 'Positioning',
-    body: 'A technology company building trusted booking and marketplace layers for planned journeys -- not on-demand, commodity services.',
-  },
-};
-
-export const personality = [
-  {
-    title: 'Trusted',
-    body: 'Evidence-led, transparent, dependable.',
-  },
-  {
-    title: 'Welcoming',
-    body: 'Human, culturally aware, never intimidating.',
-  },
-  {
-    title: 'Capable',
-    body: 'Operationally sharp and professionally calm.',
-  },
-  {
-    title: 'Modern',
-    body: 'Digital-first without looking like generic fintech.',
-  },
-];
-
-export const gochauffeur = {
-  name: 'GoChauffeur',
-  tagline: 'Travel well. Driven by trust.',
-  campaignLine: 'Discover Sri Lanka, driven well.',
-  proposition:
-    'Compare suitable chauffeurs and vehicles, share your itinerary, and receive a confirmed trip plan from our team.',
-  proofPoints: [
-    'Chauffeur and chauffeur-guide profiles',
-    'Vehicle categories for every group size',
-    'Language capability and route experience',
-    'Airport transfers and multi-day itineraries',
-    'Clear human support throughout',
+  headline: 'Technology for journeys that matter.',
+  body: [
+    'Go Technologies builds thoughtful digital platforms that improve how people move, connect and experience the world.',
+    'Our first venture, GoChauffeur, is creating a more reliable and refined way for international travellers to discover Sri Lanka—with trusted chauffeurs, carefully planned journeys and technology that keeps every trip effortless.',
   ],
-  status: {
-    label: 'MVP in development',
-    body:
-      'GoChauffeur is a website-first product currently in build, launching first for inbound travellers to Sri Lanka. Trip requests are reviewed and confirmed by our team -- an honest, concierge-assisted marketplace, not an instant-dispatch app.',
+  primaryCta,
+  secondaryCta: { label: 'Partner with us', href: '#partners' },
+  supportingLine: 'Built in Sri Lanka. Designed for the world.',
+  image: {
+    src: '/images/hero-journey.jpg',
+    alt: 'A driver’s hand resting on the wheel of a chauffeured car at dusk',
   },
-  // Set once the GoChauffeur MVP is live. Until then the showcase links
-  // to the on-page contact/waitlist form instead of an external URL, so
-  // we never point visitors at a product that isn't live yet.
-  liveUrl: null as string | null,
 };
 
 export const about = {
-  title: 'Sri Lanka first, built to scale',
+  eyebrow: 'About',
+  title: 'We build technology around real human experiences.',
+  intro:
+    'The most meaningful technology does more than complete a transaction. It removes uncertainty, builds trust and makes complex experiences feel simple.',
   body: [
-    'Go Technologies is a Sri Lankan technology company building digital platforms that can eventually serve international markets. We start with a real, well-understood problem in inbound tourism, and design the operating model and the software so it can extend to new journeys and new geographies through configuration, not rewrites.',
-    'We are founder-led at this stage, deliberately lean, and focused on proving demand, supply and operational coordination before adding complexity. Country rules, currencies, vehicle categories and languages are treated as configuration, so the platform is never permanently tied to one market.',
+    'Go Technologies is a Sri Lankan technology venture focused on building scalable, service-led digital platforms. We combine strong product thinking, dependable technology and local market understanding to create businesses capable of growing beyond borders.',
+    'Our starting point is travel and mobility—an industry where trust, coordination and service quality matter at every step.',
   ],
-  ambition: {
-    title: 'Ambition',
-    body: 'Start with Sri Lanka; scale the operating model and brand system to other travel markets.',
+  beliefsTitle: 'Better systems create better experiences.',
+  beliefs: [
+    {
+      title: 'Designed around people',
+      body: 'We begin with the needs of the people using the service—not the technology behind it.',
+    },
+    {
+      title: 'Built for trust',
+      body: 'Clear information, reliable partners and thoughtful operational standards are built into every product.',
+    },
+    {
+      title: 'Local insight, global ambition',
+      body: 'We solve problems through a deep understanding of local markets while designing every platform to scale internationally.',
+    },
+    {
+      title: 'Quality over complexity',
+      body: 'We believe premium experiences should feel simple, calm and intuitive.',
+    },
+  ],
+};
+
+export const gochauffeur = {
+  name: 'GoChauffeur',
+  eyebrow: 'Flagship venture',
+  title: 'Introducing GoChauffeur',
+  tagline: 'See more of Sri Lanka. Leave the journey to us.',
+  body: [
+    'GoChauffeur is a tourism-focused chauffeur platform designed for travellers who want more than a conventional taxi or pre-packaged tour.',
+    'The platform will help visitors plan private journeys, discover suitable vehicles and connect with professional chauffeurs for airport transfers, multi-day tours and personalised travel across Sri Lanka.',
+    'From the first enquiry to the final destination, GoChauffeur is being designed to provide greater clarity, confidence and control.',
+  ],
+  // MVP-status framing — this is where the "launching soon" / concierge-
+  // assisted honesty lives. Do not drop the `body` line below when editing
+  // this section; it's the claims-control disclosure that keeps the
+  // product-preview card from implying a live, instant-dispatch service.
+  status: {
+    label: 'Launching soon in Sri Lanka',
+    body: 'Trip requests will be reviewed and confirmed by our team — an honest, concierge-assisted start, not an instant-dispatch app.',
+  },
+  cta: { label: 'Explore GoChauffeur', href: '#contact' },
+  // Set once the GoChauffeur MVP is live. Until then the CTA above routes
+  // to the on-page contact form instead of an external URL, so we never
+  // point visitors at a product that isn't live yet.
+  liveUrl: null as string | null,
+  valuePropsTitle: 'Travel that feels considered from the beginning.',
+  valueProps: [
+    {
+      title: 'Professional chauffeurs',
+      body: 'Connect with service-oriented chauffeurs selected for tourism-focused journeys.',
+    },
+    {
+      title: 'Flexible private travel',
+      body: 'Plan airport transfers, day journeys and multi-day itineraries around individual travel needs.',
+    },
+    {
+      title: 'Clearer trip planning',
+      body: 'Understand the journey, service and expected pricing before confirming.',
+    },
+    {
+      title: 'Local knowledge',
+      body: 'Experience Sri Lanka with professionals who understand its destinations, roads and travel realities.',
+    },
+  ],
+  // Illustrative-only product preview card shown alongside the flagship
+  // copy. Every value here is a made-up example, not live data — keep the
+  // "preview" tag and the placeholder chauffeur name (no real photo, no
+  // real rating) so the card can never be read as a claim about an actual
+  // verified chauffeur network, which does not exist yet.
+  preview: {
+    tag: 'Preview — GoChauffeur is in development',
+    tabs: ['Transfers', 'Day Trips', 'Multi-day'],
+    from: 'Bandaranaike International Airport (CMB)',
+    to: 'Galle Fort',
+    date: '24 May 2026',
+    time: '10:00 AM',
+    passengers: '2 passengers',
+    ctaLabel: 'Find a chauffeur',
+    sampleChauffeur: {
+      name: 'Sample chauffeur profile',
+      vehicle: 'Mercedes-Benz E-Class',
+      note: '7 years of touring experience · English-speaking',
+      tags: ['Clean', 'Punctual', 'Comfortable'],
+    },
   },
 };
 
-export type Audience = {
-  key: 'travellers' | 'chauffeurs' | 'partners' | 'investors';
-  title: string;
-  body: string;
-  ctaLabel: string;
+export const platformVision = {
+  title: 'Beginning with mobility. Building toward connected travel.',
+  body: [
+    'GoChauffeur is the first step in a wider vision for tourism technology.',
+    'Over time, Go Technologies aims to build an ecosystem that brings together trusted mobility, local expertise and carefully selected travel services through one connected digital experience.',
+    'We are starting deliberately—with a focused platform, a strong service foundation and a model designed to expand responsibly.',
+  ],
+  roadmap: [
+    { title: 'Mobility', body: 'Premium chauffeur experiences across Sri Lanka.' },
+    { title: 'Experiences', body: 'Curated tours and activities that reveal the best of Sri Lanka.' },
+    { title: 'Hospitality', body: 'Seamless stays through trusted hotel partnerships.' },
+    { title: 'Travel Ecosystem', body: 'Integrated services for a smooth journey end-to-end.' },
+    { title: 'Beyond Borders', body: 'Expanding our platform to connect more destinations.' },
+  ],
 };
 
-export const audiences: Audience[] = [
-  {
-    key: 'travellers',
-    title: 'Travellers',
-    body: 'Inbound visitors who value safety, clarity, comfort and local knowledge on longer journeys and multi-day tours.',
-    ctaLabel: 'Explore GoChauffeur',
+export const partner = {
+  title: 'Building the future of travel takes the right partners.',
+  body: 'We are interested in working with professional chauffeurs, vehicle owners, tourism businesses, hospitality partners, technology specialists and organisations that share our commitment to dependable service. Whether you would like to join the GoChauffeur network or explore a strategic partnership with Go Technologies, we would be pleased to hear from you.',
+  primaryCta: { label: 'Become a partner', href: '#contact' },
+  secondaryCta: { label: 'Contact Go Technologies', href: '#contact' },
+  image: {
+    src: '/images/partner-banner.jpg',
+    alt: 'A chauffeur van parked on a Sri Lankan beach at sunset beneath a palm tree',
   },
-  {
-    key: 'chauffeurs',
-    title: 'Chauffeurs & vehicle owners',
-    body: 'Independent chauffeurs, chauffeur-guides and vehicle owners looking for qualified, planned demand rather than one-off rides.',
-    ctaLabel: 'Register your interest',
-  },
-  {
-    key: 'partners',
-    title: 'Travel partners & hotels',
-    body: 'Agencies, hotels and DMCs who want a dependable, professional chauffeur layer to refer or bundle into itineraries.',
-    ctaLabel: 'Talk to us about partnering',
-  },
-  {
-    key: 'investors',
-    title: 'Investors',
-    body: 'We share evidence-led updates and keep current capability clearly separate from the roadmap. Get in touch for our latest materials.',
-    ctaLabel: 'Request investor info',
-  },
-];
+};
 
 export const contact = {
   title: 'Get in touch',
   body: 'Whether you’re a traveller, a chauffeur, a travel partner or an investor, tell us a little about what you need and we’ll route it to the right person.',
   fallbackEmail: 'hello@gotechnologies.lk',
+  // Preserves a distinct path for every audience the old homepage cards
+  // used to segment explicitly (travellers/chauffeurs/partners/investors),
+  // even though the homepage itself no longer shows four separate cards
+  // — see docs/site-copy.md, reconciliation note 2.
   interestOptions: [
     'Traveller enquiry',
     'Chauffeur / vehicle partner',
@@ -151,7 +185,30 @@ export const contact = {
   ],
 };
 
+export const closing = {
+  title: 'Thoughtful technology. Trusted experiences. Global possibilities.',
+  body: 'Go Technologies is creating digital businesses that combine technology with service, trust and meaningful real-world value.',
+  wordmarkLine: 'Built in Sri Lanka. Designed for the world.',
+};
+
 export const footer = {
-  copyright: `© ${new Date().getFullYear()} ${company.legalName}. All rights reserved.`,
-  endorsement: 'GoChauffeur is a product of Go Technologies.',
+  nav: [
+    { label: 'Company', href: '#company' },
+    { label: 'GoChauffeur', href: '#gochauffeur' },
+    { label: 'Partnerships', href: '#partners' },
+    { label: 'Contact', href: '#contact' },
+  ],
+  legalLinks: [
+    { label: 'Privacy Policy', href: '/privacy/' },
+    { label: 'Terms of Use', href: '/terms/' },
+  ],
+  // Placeholder — no confirmed social accounts exist yet. Hrefs are '#'
+  // on purpose. Replace with real URLs before launch (see README "First-
+  // run checklist"); do not point these at unconfirmed accounts.
+  social: [
+    { label: 'LinkedIn', href: '#' },
+    { label: 'Instagram', href: '#' },
+    { label: 'Facebook', href: '#' },
+  ],
+  copyright: `© ${new Date().getFullYear()} ${company.shortName}. All rights reserved.`,
 };

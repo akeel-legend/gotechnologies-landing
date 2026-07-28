@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
+import { Inter, JetBrains_Mono, Fraunces } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -12,9 +12,19 @@ const inter = Inter({
   display: 'swap',
 });
 
-// Used only for the small "eyebrow" labels and stat numbers -- a
-// deliberate editorial/technical accent against the Inter display type,
-// not a body typeface.
+// Editorial serif for headlines — the warm-editorial direction's display
+// type (see docs/design-direction.md). Self-hosted via next/font/google,
+// optical sizing left to the browser via the variable axis.
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  style: ['normal', 'italic'],
+  variable: '--font-fraunces',
+  display: 'swap',
+});
+
+// Used only for the small "eyebrow" labels -- a deliberate editorial/
+// technical accent against the serif headlines and Inter body type.
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500'],
@@ -29,11 +39,11 @@ export const metadata: Metadata = {
     template: `%s — ${company.shortName}`,
   },
   description:
-    'Go Technologies builds trusted, technology-driven marketplaces for travel, starting with GoChauffeur, a pre-booked chauffeur platform for inbound tourism in Sri Lanka.',
+    'Go Technologies builds thoughtful digital platforms that improve how people move, connect and experience the world — starting with GoChauffeur, a tourism-focused chauffeur platform for Sri Lanka.',
   openGraph: {
     title: `${company.shortName} — ${company.descriptor}`,
     description:
-      'Go Technologies builds trusted, technology-driven marketplaces for travel, starting with GoChauffeur, a pre-booked chauffeur platform for inbound tourism in Sri Lanka.',
+      'Go Technologies builds thoughtful digital platforms that improve how people move, connect and experience the world — starting with GoChauffeur, a tourism-focused chauffeur platform for Sri Lanka.',
     url: siteUrl,
     siteName: company.shortName,
     images: ['/og-image.png'],
@@ -44,7 +54,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: `${company.shortName} — ${company.descriptor}`,
     description:
-      'Go Technologies builds trusted, technology-driven marketplaces for travel, starting with GoChauffeur.',
+      'Go Technologies builds thoughtful digital platforms for travel — starting with GoChauffeur in Sri Lanka.',
     images: ['/og-image.png'],
   },
   icons: {
@@ -58,7 +68,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#0B1F2A',
+  themeColor: '#FBF8F3',
 };
 
 export default function RootLayout({
@@ -67,7 +77,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${fraunces.variable} ${jetbrainsMono.variable}`}
+    >
       <body>
         <Header />
         <main>{children}</main>

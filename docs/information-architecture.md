@@ -5,12 +5,17 @@
 ```
 /                       Homepage (single-page, anchor-linked sections)
   #top                  Hero
-  #company              Company overview (purpose / promise / positioning)
-  #gochauffeur          Flagship product showcase ("Meet GoChauffeur")
-  #about                About Go Technologies (Sri Lanka-first, built to scale)
-  #partners             Audience & partnership section (travellers, chauffeurs,
-                         travel partners, investors)
+  #company              Company overview + "What We Believe" (merged, see
+                         content-structure.md — supersedes the old separate
+                         CompanyOverview/About split)
+  #gochauffeur          Flagship venture showcase ("Introducing GoChauffeur")
+                         + value proposition + illustrative product preview
+  #ventures             Platform vision / roadmap ("Beginning with mobility...")
+  #partners             Partner banner (single CTA card, not four audience
+                         cards — see content-structure.md reconciliation note)
   #contact              Contact / interest form
+                         (closing statement band follows, no anchor — it's a
+                         closing beat, not a nav destination)
 /privacy                Initial privacy policy
 /terms                  Initial terms and conditions
 (404)                   Custom not-found page
@@ -20,21 +25,23 @@
 
 ## Navigation
 
-Primary header nav (`lib/site-config.ts` → `nav`): Company, GoChauffeur,
-About, Partners & careers, Contact — each an in-page anchor. A persistent
-"Contact us" CTA sits outside the nav list on both desktop and the mobile
-menu, so the highest-intent action is always one tap away regardless of
-scroll position.
+Primary header nav (`lib/site-config.ts` → `nav`): Company, Ventures,
+GoChauffeur, Contact — each an in-page anchor. A persistent "Discover
+GoChauffeur" CTA (`primaryCta`) sits outside the nav list on both desktop
+and the mobile menu, so the highest-intent action is always one tap away
+regardless of scroll position.
 
-The footer duplicates the primary nav (for users who land at the bottom
-via search or a shared link) and adds the two policy routes:
+The footer has its own, shorter nav list (`lib/site-config.ts` →
+`footer.nav`): Company, GoChauffeur, Partnerships, Contact — matching the
+approved mockup rather than mirroring the header nav 1:1 — plus a legal
+row and social icons:
 
 ```
 Footer
-├─ Go Technologies (logo, descriptor, "product of" endorsement)
-├─ Company            (mirrors header nav)
-├─ Legal              (Privacy, Terms)      <- new in this pass
-└─ Contact            (email, location)
+├─ Go Technologies (white wordmark)
+├─ Company · GoChauffeur · Partnerships · Contact   (footer.nav)
+├─ Social icons (LinkedIn, Instagram, Facebook — placeholder hrefs, see README)
+└─ Legal entity, copyright, Privacy Policy · Terms of Use
 ```
 
 ## Why single-page for `/`, separate routes for policies

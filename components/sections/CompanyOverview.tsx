@@ -1,73 +1,72 @@
 import { Container } from '../layout/Container';
-import { SectionHeading } from '../ui/SectionHeading';
+import { Eyebrow } from '../ui/Eyebrow';
 import { Reveal } from '../motion/Reveal';
-import { foundation, personality } from '@/lib/site-config';
+import { about } from '@/lib/site-config';
 
-const foundationCards = [
-  { ...foundation.purpose, bg: 'bg-accent-sage', icon: 'compass' as const },
-  { ...foundation.promise, bg: 'bg-accent-tan', icon: 'shield' as const },
-  { ...foundation.positioning, bg: 'bg-accent-amber', icon: 'layers' as const },
-];
-
-const personalityBg = ['bg-accent-sage', 'bg-accent-teal', 'bg-accent-tan', 'bg-accent-amber'];
-
-function CardIcon({ name }: { name: 'compass' | 'shield' | 'layers' }) {
-  const common = { fill: 'none', stroke: '#15252B', strokeWidth: 1.75, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
-  if (name === 'compass') {
-    return (
-      <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="12" cy="12" r="9" {...common} />
-        <path d="M14.5 9.5 13 13l-3.5 1.5L11 11l3.5-1.5Z" {...common} />
-      </svg>
-    );
-  }
-  if (name === 'shield') {
-    return (
-      <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 3.5 19 6v5.5c0 4.2-2.9 7-7 9-4.1-2-7-4.8-7-9V6l7-2.5Z" {...common} />
-        <path d="M9 12l2 2 4-4.5" {...common} />
-      </svg>
-    );
-  }
-  return (
-    <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M12 3.5 20 8l-8 4.5L4 8l8-4.5Z" {...common} />
-      <path d="M4 12l8 4.5 8-4.5" {...common} />
-      <path d="M4 16l8 4.5 8-4.5" {...common} />
+const icons = {
+  people: (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="8.5" cy="8.5" r="3" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="16" cy="9.5" r="2.4" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M3.5 19c0-3 2.3-5.2 5-5.2s5 2.2 5 5.2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M14.2 14.3c1.9.4 3.3 2 3.3 4.2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
-  );
-}
+  ),
+  trust: (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M12 3.5 19 6v5.5c0 4.2-2.9 7-7 9-4.1-2-7-4.8-7-9V6l7-2.5Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      <path d="M9 12l2 2 4-4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  globe: (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M3 12h18M12 3c2.6 2.4 4 5.6 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.6-4-9s1.4-6.6 4-9Z" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  ),
+  gem: (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4.5 9 12 3.5 19.5 9 12 20.5 4.5 9Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M4.5 9h15M9 9l3 11.5L15 9" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+    </svg>
+  ),
+};
+
+const iconOrder = [icons.people, icons.trust, icons.globe, icons.gem];
 
 export function CompanyOverview() {
   return (
-    <section id="company" className="divider bg-midnight py-20 md:py-28">
+    <section id="company" className="divider bg-cream py-20 md:py-28">
       <Container>
         <Reveal>
-          <SectionHeading
-            eyebrow="Company"
-            title="What we're building, and why"
-            body="Go Technologies designs the operating model first, then the software -- so trust and clarity carry through everything we ship."
-          />
+          <div className="grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-start">
+            <div>
+              <Eyebrow>{about.eyebrow}</Eyebrow>
+              <h2 className="mt-3 font-serif text-section-title text-ink">{about.title}</h2>
+              <p className="mt-5 max-w-xl text-body text-stone">{about.intro}</p>
+            </div>
+            <div className="space-y-4 md:mt-2 md:border-l md:border-line md:pl-8">
+              {about.body.map((paragraph) => (
+                <p key={paragraph} className="text-body text-stone">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </div>
         </Reveal>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-3">
-          {foundationCards.map((card, i) => (
-            <Reveal key={card.title} delayMs={i * 90}>
-              <div className={`rounded-card ${card.bg} p-8`}>
-                <CardIcon name={card.icon} />
-                <p className="mt-5 text-ui-label text-midnight">{card.title}</p>
-                <p className="mt-3 text-body text-ink/80">{card.body}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-
         <Reveal delayMs={120}>
-          <div className="mt-5 grid overflow-hidden rounded-card sm:grid-cols-4">
-            {personality.map((trait, i) => (
-              <div key={trait.title} className={`p-8 ${personalityBg[i % personalityBg.length]}`}>
-                <p className="text-ui-label text-midnight">{trait.title}</p>
-                <p className="mt-2 text-caption text-ink/70">{trait.body}</p>
+          <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {about.beliefs.map((belief, i) => (
+              <div key={belief.title} className="rounded-card border border-line bg-card p-7">
+                <div className="text-gold">{iconOrder[i % iconOrder.length]}</div>
+                <p className="mt-5 font-serif text-lg text-ink">{belief.title}</p>
+                <p className="mt-2 text-body text-stone">{belief.body}</p>
               </div>
             ))}
           </div>

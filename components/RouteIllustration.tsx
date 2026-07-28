@@ -1,3 +1,8 @@
+// DEPRECATED — not imported anywhere. Superseded by the hero photo in the
+// warm-editorial rebuild. Kept only because this sandbox can't delete
+// files from a mounted repo folder; safe to delete for real in your own
+// editor. Original comment follows:
+//
 // Decorative "route grammar" graphic: rounded route lines connecting
 // points, with the gold waypoint used sparingly for the destination.
 // Follows brand guidelines section 11 (avoid literal car/map-pin

@@ -1,5 +1,9 @@
 'use client';
 
+// DEPRECATED — not imported anywhere. The warm-editorial rebuild dropped
+// the glow-blob parallax treatment (didn't fit the flatter, print-like
+// mockup direction). Kept only because this sandbox can't delete files
+// from a mounted repo folder; safe to delete for real in your own editor.
 import { useEffect, useRef, useState, type HTMLAttributes, type ReactNode } from 'react';
 
 /**

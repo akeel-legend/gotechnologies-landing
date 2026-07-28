@@ -22,12 +22,12 @@ export function PolicyPage({
   children: ReactNode;
 }) {
   return (
-    <article className="bg-midnight py-20 md:py-28">
+    <article className="bg-cream py-20 md:py-28">
       <Container className="max-w-3xl">
         <Eyebrow>{eyebrow}</Eyebrow>
-        <h1 className="mt-3 text-page-title text-white">{title}</h1>
-        <p className="mt-4 text-caption text-white/50">Last updated: {lastUpdated}</p>
-        <p className="mt-6 text-body leading-relaxed text-white/70">{intro}</p>
+        <h1 className="mt-3 font-serif text-page-title text-ink">{title}</h1>
+        <p className="mt-4 text-caption text-stone/70">Last updated: {lastUpdated}</p>
+        <p className="mt-6 text-body leading-relaxed text-stone">{intro}</p>
 
         <div className="mt-12 space-y-10 divider pt-12">{children}</div>
       </Container>
@@ -38,8 +38,8 @@ export function PolicyPage({
 export function PolicySection({ title, children }: { title: string; children: ReactNode }) {
   return (
     <section>
-      <h2 className="text-xl font-semibold text-white">{title}</h2>
-      <div className="mt-3 space-y-3 text-body leading-relaxed text-white/65">{children}</div>
+      <h2 className="font-serif text-xl text-ink">{title}</h2>
+      <div className="mt-3 space-y-3 text-body leading-relaxed text-stone">{children}</div>
     </section>
   );
 }

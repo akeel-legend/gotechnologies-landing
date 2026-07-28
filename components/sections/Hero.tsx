@@ -1,19 +1,23 @@
+import Image from 'next/image';
 import { Container } from '../layout/Container';
 import { Button } from '../ui/Button';
-import { Eyebrow } from '../ui/Eyebrow';
-import { RouteIllustration } from '../RouteIllustration';
-import { ParallaxLayer } from '../motion/Parallax';
 import { Reveal } from '../motion/Reveal';
 import { hero } from '@/lib/site-config';
 
 export function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden bg-midnight">
-      <Container className="relative grid items-center gap-12 py-20 md:grid-cols-2 md:py-32">
+    <section id="top" className="relative overflow-hidden bg-cream">
+      <Container className="grid items-center gap-12 py-16 md:grid-cols-2 md:py-24">
         <Reveal>
-          <Eyebrow>{hero.eyebrow}</Eyebrow>
-          <h1 className="mt-4 text-hero text-white">{hero.headline}</h1>
-          <p className="mt-6 max-w-xl text-body text-white/65">{hero.body}</p>
+          <span className="block h-px w-10 bg-gold" aria-hidden="true" />
+          <h1 className="mt-5 font-serif text-hero text-ink">{hero.headline}</h1>
+          <div className="mt-6 max-w-xl space-y-4">
+            {hero.body.map((paragraph) => (
+              <p key={paragraph} className="text-body text-stone">
+                {paragraph}
+              </p>
+            ))}
+          </div>
           <div className="mt-9 flex flex-wrap gap-4">
             <Button href={hero.primaryCta.href} variant="primary">
               {hero.primaryCta.label}
@@ -22,25 +26,30 @@ export function Hero() {
               {hero.secondaryCta.label}
             </Button>
           </div>
+          <p className="mt-8 flex items-center gap-2 text-caption text-stone/80">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21Z"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              />
+              <circle cx="12" cy="9.5" r="2.25" stroke="currentColor" strokeWidth="1.5" />
+            </svg>
+            {hero.supportingLine}
+          </p>
         </Reveal>
 
-        <Reveal delayMs={150} className="relative flex flex-col items-center justify-center px-2 py-8 sm:px-8">
-          <ParallaxLayer
-            speed={-0.15}
-            className="pointer-events-none absolute -top-10 left-2 h-48 w-48 rounded-full bg-teal/25 blur-3xl"
-            aria-hidden="true"
-          />
-          <ParallaxLayer
-            speed={0.2}
-            className="pointer-events-none absolute -bottom-8 right-2 h-56 w-56 rounded-full bg-gold/20 blur-3xl"
-            aria-hidden="true"
-          />
-          <ParallaxLayer speed={0.05} className="relative z-10 w-full max-w-md">
-            <RouteIllustration className="h-56 w-full sm:h-72" />
-            <p className="mt-6 text-center font-mono text-eyebrow text-white/40">
-              A planned journey, not an impulsive ride.
-            </p>
-          </ParallaxLayer>
+        <Reveal delayMs={150}>
+          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[32px] rounded-tl-[4px] shadow-card">
+            <Image
+              src={hero.image.src}
+              alt={hero.image.alt}
+              fill
+              sizes="(min-width: 768px) 45vw, 90vw"
+              className="object-cover"
+              priority
+            />
+          </div>
         </Reveal>
       </Container>
     </section>

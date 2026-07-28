@@ -1,6 +1,27 @@
 # Implementation plan
 
-## Status
+## Status (v2 — warm-editorial rebuild)
+
+The site was rebuilt from an approved visual mockup: new colour/type
+tokens (`docs/design-direction.md`, "Pivot to warm editorial"), a new
+copy source of truth (`docs/site-copy.md`), and new/rebuilt sections —
+`CompanyOverview` (merged belief grid), `ProductShowcase` (flagship +
+value props + an illustrative, explicitly-labelled product-preview
+card), `PlatformVision` (new), `Partner` (replaces `Audiences`), `Closing`
+(new). Two Unsplash photos were sourced for the hero and partner banner
+since the mockup's own photography wasn't available as an asset — see
+`docs/site-copy.md` for credits and `docs/content-structure.md` for the
+full section-to-config mapping. `About.tsx`, `Audiences.tsx`,
+`RouteIllustration.tsx` and `motion/Parallax.tsx` are deprecated (not
+composed into `app/page.tsx`) but left in the tree with file-header
+comments, rather than deleted, because the build environment this pass
+ran in could not delete files from the mounted repo folder — safe to
+delete for real locally.
+
+The rest of this document (below) describes the pre-rebuild state and
+an earlier gap-closing pass; it's kept for history.
+
+## Status (original)
 
 The site was scaffolded and largely built in an earlier pass (see git
 history: "Scaffold Go Technologies corporate landing page" through

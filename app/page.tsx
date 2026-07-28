@@ -1,9 +1,10 @@
 import { Hero } from '@/components/sections/Hero';
 import { CompanyOverview } from '@/components/sections/CompanyOverview';
 import { ProductShowcase } from '@/components/sections/ProductShowcase';
-import { About } from '@/components/sections/About';
-import { Audiences } from '@/components/sections/Audiences';
+import { PlatformVision } from '@/components/sections/PlatformVision';
+import { Partner } from '@/components/sections/Partner';
 import { ContactSection } from '@/components/sections/ContactSection';
+import { Closing } from '@/components/sections/Closing';
 
 export default function HomePage() {
   return (
@@ -11,9 +12,10 @@ export default function HomePage() {
       <Hero />
       <CompanyOverview />
       <ProductShowcase />
-      <About />
-      <Audiences />
+      <PlatformVision />
+      <Partner />
       <ContactSection />
+      <Closing />
     </>
   );
 }
