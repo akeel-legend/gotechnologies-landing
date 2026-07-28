@@ -126,10 +126,24 @@ understand its destinations, roads and travel realities.
 The mockup shows an illustrative "GoChauffeur" booking-widget graphic
 next to the flagship copy (route search fields + a "Recommended
 chauffeur" card). Built as a static, coded UI mock — not a screenshot of
-a real product — labelled **"Preview — GoChauffeur is in development"**
-and using a placeholder chauffeur profile (no real name, no real rating,
-no stock photo of a person) specifically so it can't be read as a claim
-about an actual verified chauffeur network. See reconciliation note 4.
+a real product.
+
+v2 revision: the first pass labelled this card "Preview — GoChauffeur is
+in development" and filled it with a fabricated example trip and a
+placeholder chauffeur profile. Feedback was that this read as an obvious
+placeholder rather than a real app. Revised approach, inspired by a
+reference screenshot of a live-feeling mobile booking flow: the card now
+shows real field labels (Pick-up location, Drop-off location, Pick-up
+date, Travellers, Vehicle type) in their **empty/placeholder state** —
+"Where will we pick you up?", "Select date", etc. — exactly like an app
+before you've typed anything in. An empty form makes no factual claim
+about anything, which is what keeps this honesty-safe without needing an
+explicit "Preview" tag. The fabricated named chauffeur profile was
+dropped entirely and replaced with "Chat on WhatsApp" / "Request a call"
+quick actions — real, executable next steps rather than invented social
+proof. The MVP/concierge-assisted disclosure still lives outside the
+card, under the "Launching soon in Sri Lanka" status pill — see
+reconciliation note 4.
 
 ---
 
@@ -194,9 +208,13 @@ Go Technologies
 *Built in Sri Lanka. Designed for the world.*
 
 Not visible in the mockup screenshot (likely cropped below the fold) but
-present in the original copy block; kept as the closing band immediately
-before the footer, on the same dark surface as the footer for a smooth
-transition.
+present in the original copy block. v3 revision: this was originally its
+own full-height section directly above the footer, but back-to-back with
+the footer (same dark background, same centered layout, same wordmark
+shown twice) it read as repetitive rather than deliberate. It's now
+folded into the top of `Footer.tsx` itself — same words, same position in
+the page, just composed as one footer instead of two stacked dark
+sections. See `docs/content-structure.md`.
 
 ---
 
@@ -224,9 +242,10 @@ first.
 Checked against the same rule as before: no "verified", "instant",
 "24/7", "guaranteed" or superlative market claims ("#1", "largest")
 appear above without a documented, currently-true operating definition.
-The one addition in this pass (the product-preview card) required an
-explicit "Preview" label and a placeholder profile to keep passing this
-rule — see reconciliation note 4.
+The product-preview card (see reconciliation note 4) passes this rule by
+showing empty-state form fields rather than a filled-in, invented trip
+or chauffeur profile — no fabricated names, ratings, review counts or
+"verified" badges anywhere in it.
 
 ## Reconciliation notes (decisions made when building from the mockup)
 
@@ -250,9 +269,13 @@ resolved so a future edit doesn't accidentally re-open them.
    exactly rather than treating them as a naming inconsistency.
 4. **MVP/concierge-assisted disclosure** — carried forward from the prior
    copy pass as a one-line caption under the "Launching soon in Sri
-   Lanka" status pill, and reinforced by explicitly labelling the
-   flagship section's product-preview card as a "Preview" with a
-   placeholder (not real) chauffeur profile. This was not in the mockup
-   screenshot or the original text block, but is required to keep the
-   section from implying GoChauffeur already has a live, verified,
-   instant-booking network — see `docs/site-requirements.md` §1.
+   Lanka" status pill (outside the product-preview card). This was not
+   in the mockup screenshot or the original text block, but is required
+   to keep the section from implying GoChauffeur already has a live,
+   verified, instant-booking network — see `docs/site-requirements.md`
+   §1. Revised in v2: the product-preview card itself no longer carries
+   an explicit "Preview" tag or a placeholder chauffeur profile — those
+   read as obviously fake. It now shows real search-field labels in
+   their empty/placeholder state (an empty form asserts nothing), which
+   both looks like a real app and stays inside the claims-control rule.
+   See the "Product preview card" note above.

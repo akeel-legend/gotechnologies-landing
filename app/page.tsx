@@ -4,8 +4,10 @@ import { ProductShowcase } from '@/components/sections/ProductShowcase';
 import { PlatformVision } from '@/components/sections/PlatformVision';
 import { Partner } from '@/components/sections/Partner';
 import { ContactSection } from '@/components/sections/ContactSection';
-import { Closing } from '@/components/sections/Closing';
 
+// No separate "Closing" section here — the closing statement is now
+// folded into the top of Footer.tsx (shared layout, appears after this
+// page's content). See components/layout/Footer.tsx.
 export default function HomePage() {
   return (
     <>
@@ -15,7 +17,6 @@ export default function HomePage() {
       <PlatformVision />
       <Partner />
       <ContactSection />
-      <Closing />
     </>
   );
 }

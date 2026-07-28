@@ -1,26 +1,11 @@
-import Image from 'next/image';
-import { Container } from '../layout/Container';
-import { Reveal } from '../motion/Reveal';
-import { closing } from '@/lib/site-config';
-
+// DEPRECATED — not imported anywhere. The closing statement now lives at
+// the top of Footer.tsx (folded in directly) instead of as its own
+// full-height dark section: two stacked centered-logo dark blocks back
+// to back read as repetitive/unfinished, so they were merged into one
+// footer with a "statement -> brand -> legal" hierarchy. See
+// docs/content-structure.md. Kept only because this sandbox can't delete
+// files from a mounted repo folder; safe to delete for real in your own
+// editor.
 export function Closing() {
-  return (
-    <section className="bg-forest py-20 text-center text-cream md:py-24">
-      <Container className="max-w-2xl">
-        <Reveal>
-          <h2 className="font-serif text-section-title">{closing.title}</h2>
-          <p className="mt-5 text-body text-cream/70">{closing.body}</p>
-
-          <Image
-            src="/logo/corporate-white.png"
-            alt="Go Technologies"
-            width={700}
-            height={300}
-            className="mx-auto mt-9 h-14 w-auto"
-          />
-          <p className="mt-3 text-caption text-cream/50">{closing.wordmarkLine}</p>
-        </Reveal>
-      </Container>
-    </section>
-  );
+  return null;
 }

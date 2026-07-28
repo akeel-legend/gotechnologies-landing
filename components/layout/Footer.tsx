@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { Container } from './Container';
-import { company, footer } from '@/lib/site-config';
+import { Reveal } from '../motion/Reveal';
+import { company, footer, closing } from '@/lib/site-config';
 
 const socialIcons: Record<string, React.ReactNode> = {
   LinkedIn: (
@@ -36,20 +37,34 @@ const socialIcons: Record<string, React.ReactNode> = {
   ),
 };
 
+// Closing statement is folded directly into the footer's top band, rather
+// than living as its own full-height dark section above it. Two stacked
+// centered-logo dark blocks read as repetitive and unfinished (same bg,
+// same layout, same wordmark twice in a row) — one continuous footer with
+// an internal "statement -> brand -> legal" hierarchy reads as a single
+// deliberate close instead. See docs/content-structure.md.
 export function Footer() {
   return (
     <footer className="divider-dark bg-forest text-cream/70">
-      <Container className="py-14">
-        <div className="flex flex-col items-center gap-8 text-center">
+      <Container className="pt-16 pb-10 md:pt-20">
+        <Reveal>
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="font-serif text-section-title text-cream">{closing.title}</h2>
+            <p className="mt-4 text-body text-cream/70">{closing.body}</p>
+          </div>
+        </Reveal>
+
+        <div className="mt-14 flex flex-col items-center gap-7 border-t border-white/10 pt-12 text-center">
           <Image
             src="/logo/corporate-white.png"
             alt="Go Technologies"
             width={700}
             height={300}
-            className="h-14 w-auto"
+            className="h-9 w-auto"
           />
+          <p className="-mt-4 text-caption text-cream/45">{closing.wordmarkLine}</p>
 
-          <nav aria-label="Footer" className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+          <nav aria-label="Footer" className="mt-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
             {footer.nav.map((item) => (
               <a key={item.href} href={item.href} className="text-body text-cream/70 hover:text-cream">
                 {item.label}
@@ -71,7 +86,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col items-center gap-2 border-t border-white/10 pt-8 text-center text-caption text-cream/50">
+        <div className="mt-10 flex flex-col items-center gap-2 border-t border-white/10 pt-7 text-center text-caption text-cream/50">
           <p>{company.legalName}</p>
           <p>{footer.copyright}</p>
           <p className="flex items-center gap-2">

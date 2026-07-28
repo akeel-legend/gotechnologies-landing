@@ -1,139 +1,106 @@
-'use client';
-
-import { useState, type FormEvent } from 'react';
 import { contact } from '@/lib/site-config';
 
-type Status = 'idle' | 'submitting' | 'success' | 'error';
+// The form itself is fully built out and fillable (all fields real,
+// required, no disabled inputs) -- only submission is intentionally
+// switched off, because there's no backend wired up yet (no Formspree
+// endpoint, no other collection mechanism). The submit button is
+// deliberately inert: it does not POST anywhere and does not fall back
+// to a mailto: link. Flip this to `true` (and reinstate a real submit
+// handler -- Formspree POST, a custom API route, etc. -- this file will
+// need `'use client'` and useState again at that point, see git history)
+// once there's somewhere for submissions to actually go.
+const SUBMISSION_ENABLED = false;
 
-const formId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID;
+// Pill radius for single-line controls only. A `rows={5}` textarea at a
+// 999px pill radius renders as a stadium/capsule shape, which reads as a
+// bug rather than a design choice -- multi-line fields use `rounded-card`
+// (20px) instead, same as the rest of the site's soft-cornered panels.
+const fieldBase =
+  'w-full border border-line bg-white px-4 py-3 text-body text-ink placeholder:text-stone/40 focus:border-forest focus:outline-none focus:ring-2 focus:ring-forest/15';
+const pillField = `${fieldBase} rounded-control`;
+const panelField = `${fieldBase} rounded-card`;
 
-const inputClass =
-  'w-full rounded-control border border-line bg-white px-4 py-3 text-body text-ink placeholder:text-stone/40 focus:border-forest focus:outline-none focus:ring-2 focus:ring-forest/15';
-
+// Rendered inside ContactSection's shared card panel (no border/shadow of
+// its own), stacked single-column -- see ContactSection.tsx.
 export function ContactForm() {
-  const [status, setStatus] = useState<Status>('idle');
-
-  // No Formspree form configured yet: degrade to a plain mailto link so
-  // the page still ships something usable rather than a dead form.
-  if (!formId) {
-    return (
-      <div className="rounded-card border border-line bg-card p-8">
-        <p className="text-body text-stone">
-          Our online form is being connected. In the meantime, email us directly and
-          we&apos;ll route your message to the right person.
-        </p>
-        <a
-          href={`mailto:${contact.fallbackEmail}`}
-          className="mt-6 inline-flex min-h-[44px] items-center justify-center rounded-control bg-forest px-6 text-ui-label text-cream hover:bg-forest-hover"
-        >
-          Email {contact.fallbackEmail}
-        </a>
-      </div>
-    );
-  }
-
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setStatus('submitting');
-
-    const form = event.currentTarget;
-    const data = new FormData(form);
-
-    try {
-      const response = await fetch(`https://formspree.io/f/${formId}`, {
-        method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: data,
-      });
-
-      if (response.ok) {
-        setStatus('success');
-        form.reset();
-      } else {
-        setStatus('error');
-      }
-    } catch {
-      setStatus('error');
-    }
-  }
-
-  if (status === 'success') {
-    return (
-      <div className="rounded-card border border-line bg-card p-8">
-        <p className="font-serif text-section-title text-ink">Thank you</p>
-        <p className="mt-2 text-body text-stone">
-          Your message is with us. We&apos;ll be in touch shortly.
-        </p>
-      </div>
-    );
-  }
-
   return (
-    <form onSubmit={handleSubmit} className="rounded-card border border-line bg-card p-8">
-      {/* Honeypot field for basic spam protection; hidden from real users. */}
-      <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" />
+    <form aria-describedby={SUBMISSION_ENABLED ? undefined : 'contact-form-disabled-note'}>
+      <div>
+        <label htmlFor="name" className="text-ui-label text-ink/80">
+          Name
+        </label>
+        <input id="name" name="name" type="text" required className={`mt-2 ${pillField}`} />
+      </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div>
-          <label htmlFor="name" className="text-ui-label text-ink/80">
-            Name
-          </label>
-          <input id="name" name="name" type="text" required className={`mt-2 ${inputClass}`} />
-        </div>
-        <div>
-          <label htmlFor="email" className="text-ui-label text-ink/80">
-            Email
-          </label>
-          <input id="email" name="email" type="email" required className={`mt-2 ${inputClass}`} />
-        </div>
+      <div className="mt-5">
+        <label htmlFor="email" className="text-ui-label text-ink/80">
+          Email
+        </label>
+        <input id="email" name="email" type="email" required className={`mt-2 ${pillField}`} />
+      </div>
+
+      <div className="mt-5">
+        <label htmlFor="phone" className="text-ui-label text-ink/80">
+          Phone <span className="text-stone/50">(optional)</span>
+        </label>
+        <input id="phone" name="phone" type="tel" className={`mt-2 ${pillField}`} />
       </div>
 
       <div className="mt-5">
         <label htmlFor="interest" className="text-ui-label text-ink/80">
           I&apos;m getting in touch as a...
         </label>
-        <select id="interest" name="interest" required defaultValue="" className={`mt-2 ${inputClass}`}>
-          <option value="" disabled>
-            Select one
-          </option>
-          {contact.interestOptions.map((option) => (
-            <option key={option} value={option}>
-              {option}
+        <div className="relative mt-2">
+          <select
+            id="interest"
+            name="interest"
+            required
+            defaultValue=""
+            className={`appearance-none pr-10 ${pillField}`}
+          >
+            <option value="" disabled>
+              Select one
             </option>
-          ))}
-        </select>
+            {contact.interestOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+            className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-stone/50"
+          >
+            <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
       </div>
 
       <div className="mt-5">
         <label htmlFor="message" className="text-ui-label text-ink/80">
           Message
         </label>
-        <textarea
-          id="message"
-          name="message"
-          rows={5}
-          required
-          className={`mt-2 ${inputClass}`}
-        />
+        <textarea id="message" name="message" rows={5} required className={`mt-2 resize-none ${panelField}`} />
       </div>
-
-      {status === 'error' ? (
-        <p role="alert" className="mt-4 text-body text-red-700">
-          Something went wrong sending your message. Please try again, or email{' '}
-          <a href={`mailto:${contact.fallbackEmail}`} className="underline">
-            {contact.fallbackEmail}
-          </a>
-          .
-        </p>
-      ) : null}
 
       <button
         type="submit"
-        disabled={status === 'submitting'}
-        className="mt-6 inline-flex min-h-[44px] items-center justify-center rounded-control bg-forest px-6 text-ui-label text-cream transition-colors hover:bg-forest-hover disabled:opacity-60"
+        disabled={!SUBMISSION_ENABLED}
+        aria-disabled={!SUBMISSION_ENABLED}
+        className="mt-6 flex min-h-[48px] w-full items-center justify-center rounded-control bg-forest text-ui-label text-cream transition-colors hover:bg-forest-hover disabled:cursor-not-allowed disabled:bg-line disabled:text-stone/60 disabled:hover:bg-line"
       >
-        {status === 'submitting' ? 'Sending…' : 'Send message'}
+        Send message
       </button>
+
+      {!SUBMISSION_ENABLED ? (
+        <p id="contact-form-disabled-note" className="mt-3 text-center text-caption text-stone/60">
+          This form is not yet connected — submissions are disabled until it is.
+        </p>
+      ) : null}
     </form>
   );
 }

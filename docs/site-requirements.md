@@ -84,12 +84,19 @@ requirement-to-component trace). In particular:
 - No live backend required at build time.
 - Frontend validation via native HTML5 `required`/`type` constraints.
 - Accessible labels for every field.
-- Loading, success and error UI states.
-- Configurable submission handler: posts to Formspree if
-  `NEXT_PUBLIC_FORMSPREE_FORM_ID` is set.
-- Safe local fallback: if unset, the form is replaced with a direct
-  `mailto:` call to action — the site never claims a submission succeeded
-  when there is nowhere for it to go.
+- Current state (reinterpreted from an earlier version of this
+  requirement): the full inquiry form is always shown and fully
+  fillable — no swap to a "form is being connected" placeholder card or
+  a bare `mailto:` link. Submission itself is disabled at the component
+  level (`SUBMISSION_ENABLED = false` in `components/ContactForm.tsx`):
+  the submit button renders disabled with a short "not yet connected"
+  note, and there is no click handler that could silently fail or claim
+  success. This was a deliberate choice over the earlier
+  Formspree-or-mailto-fallback design — see `README.md`, "Formspree
+  setup (contact form) — not yet done" for how to re-enable real
+  submission (Formspree POST or otherwise) once there's a backend to
+  send it to. Loading/success/error UI states will come back at that
+  point; they don't apply while submission is off.
 
 ## 7. SEO requirements
 

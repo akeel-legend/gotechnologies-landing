@@ -117,26 +117,30 @@ export const gochauffeur = {
       body: 'Experience Sri Lanka with professionals who understand its destinations, roads and travel realities.',
     },
   ],
-  // Illustrative-only product preview card shown alongside the flagship
-  // copy. Every value here is a made-up example, not live data — keep the
-  // "preview" tag and the placeholder chauffeur name (no real photo, no
-  // real rating) so the card can never be read as a claim about an actual
-  // verified chauffeur network, which does not exist yet.
+  // Product preview card shown alongside the flagship copy — styled as a
+  // real booking-form snippet (search fields in their empty/placeholder
+  // state, like an app screenshot, not a filled-in fake itinerary). This
+  // is the honesty-safe way to look like a real app: an empty form makes
+  // no claim about anything. Do not fill these fields with a specific
+  // fabricated trip, chauffeur name, rating or count — that's what makes
+  // a preview read as fake rather than as "the product, before you've
+  // typed anything into it." The MVP/concierge-assisted disclosure still
+  // lives in `status` above, outside the card.
   preview: {
-    tag: 'Preview — GoChauffeur is in development',
+    badge: 'It’s free & takes 2 minutes',
     tabs: ['Transfers', 'Day Trips', 'Multi-day'],
-    from: 'Bandaranaike International Airport (CMB)',
-    to: 'Galle Fort',
-    date: '24 May 2026',
-    time: '10:00 AM',
-    passengers: '2 passengers',
-    ctaLabel: 'Find a chauffeur',
-    sampleChauffeur: {
-      name: 'Sample chauffeur profile',
-      vehicle: 'Mercedes-Benz E-Class',
-      note: '7 years of touring experience · English-speaking',
-      tags: ['Clean', 'Punctual', 'Comfortable'],
+    fields: {
+      pickup: { label: 'Pick-up location', placeholder: 'Where will we pick you up?' },
+      dropoff: { label: 'Drop-off location', placeholder: 'Where will we drop you off?' },
+      date: { label: 'Pick-up date', placeholder: 'Select date' },
+      travellers: { label: 'Travellers', placeholder: '1 traveller' },
+      vehicle: { label: 'Vehicle type', placeholder: 'Any type' },
     },
+    cta: { label: 'Plan My Journey', href: '#contact' },
+    quickActions: [
+      { label: 'Chat on WhatsApp', href: '#contact' },
+      { label: 'Request a call', href: '#contact' },
+    ],
   },
 };
 
