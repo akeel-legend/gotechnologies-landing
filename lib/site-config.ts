@@ -22,13 +22,13 @@ export const company = {
 };
 
 export const nav = [
-  { label: 'Company', href: '#company' },
-  { label: 'Ventures', href: '#ventures' },
-  { label: 'GoChauffeur', href: '#gochauffeur' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Company', href: '/#company' },
+  { label: 'Ventures', href: '/#ventures' },
+  { label: 'GoChauffeur', href: '/#gochauffeur' },
+  { label: 'Contact', href: '/#contact' },
 ];
 
-export const primaryCta = { label: 'Discover GoChauffeur', href: '#gochauffeur' };
+export const primaryCta = { label: 'Discover GoChauffeur', href: '/#gochauffeur' };
 
 export const hero = {
   headline: 'Technology for journeys that matter.',
@@ -197,10 +197,10 @@ export const closing = {
 
 export const footer = {
   nav: [
-    { label: 'Company', href: '#company' },
-    { label: 'GoChauffeur', href: '#gochauffeur' },
-    { label: 'Partnerships', href: '#partners' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Company', href: '/#company' },
+    { label: 'GoChauffeur', href: '/#gochauffeur' },
+    { label: 'Partnerships', href: '/#partners' },
+    { label: 'Contact', href: '/#contact' },
   ],
   legalLinks: [
     { label: 'Privacy Policy', href: '/privacy/' },

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Container } from './Container';
 import { nav, primaryCta } from '@/lib/site-config';
 
@@ -11,7 +12,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-cream/90 backdrop-blur">
       <Container className="flex h-20 items-center justify-between">
-        <a href="#top" className="flex items-center" aria-label="Go Technologies home">
+        <Link href="/" className="flex items-center" aria-label="Go Technologies home">
           <Image
             src="/logo/corporate-dark.png"
             alt="Go Technologies"
@@ -20,7 +21,7 @@ export function Header() {
             className="h-14 w-auto sm:h-16"
             priority
           />
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
           {nav.map((item) => (
