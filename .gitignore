@@ -34,3 +34,4 @@ yarn-error.log*
 
 # local agent/tool settings
 .claude/
+.env*

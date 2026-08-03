@@ -1,15 +1,13 @@
+'use client';
+
+import { useState, type FormEvent } from 'react';
 import { contact } from '@/lib/site-config';
 
-// The form itself is fully built out and fillable (all fields real,
-// required, no disabled inputs) -- only submission is intentionally
-// switched off, because there's no backend wired up yet (no Formspree
-// endpoint, no other collection mechanism). The submit button is
-// deliberately inert: it does not POST anywhere and does not fall back
-// to a mailto: link. Flip this to `true` (and reinstate a real submit
-// handler -- Formspree POST, a custom API route, etc. -- this file will
-// need `'use client'` and useState again at that point, see git history)
-// once there's somewhere for submissions to actually go.
-const SUBMISSION_ENABLED = false;
+// Formspree form ID from NEXT_PUBLIC_FORMSPREE_FORM_ID (see .env.example).
+// Submission is disabled with an inline note if it's unset, so the form
+// never silently fails to go anywhere.
+const FORMSPREE_FORM_ID = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID;
+const SUBMISSION_ENABLED = Boolean(FORMSPREE_FORM_ID);
 
 // Pill radius for single-line controls only. A `rows={5}` textarea at a
 // 999px pill radius renders as a stadium/capsule shape, which reads as a
@@ -20,11 +18,51 @@ const fieldBase =
 const pillField = `${fieldBase} rounded-control`;
 const panelField = `${fieldBase} rounded-card`;
 
+type Status = 'idle' | 'submitting' | 'success' | 'error';
+
 // Rendered inside ContactSection's shared card panel (no border/shadow of
 // its own), stacked single-column -- see ContactSection.tsx.
 export function ContactForm() {
+  const [status, setStatus] = useState<Status>('idle');
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!SUBMISSION_ENABLED) return;
+
+    const form = event.currentTarget;
+    setStatus('submitting');
+
+    try {
+      const response = await fetch(`https://formspree.io/f/${FORMSPREE_FORM_ID}`, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(form),
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        form.reset();
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    }
+  }
+
+  if (status === 'success') {
+    return (
+      <p className="text-body text-ink">
+        Thanks for reaching out — we&apos;ve received your message and will get back to you soon.
+      </p>
+    );
+  }
+
   return (
-    <form aria-describedby={SUBMISSION_ENABLED ? undefined : 'contact-form-disabled-note'}>
+    <form
+      onSubmit={handleSubmit}
+      aria-describedby={!SUBMISSION_ENABLED ? 'contact-form-disabled-note' : undefined}
+    >
       <div>
         <label htmlFor="name" className="text-ui-label text-ink/80">
           Name
@@ -89,16 +127,22 @@ export function ContactForm() {
 
       <button
         type="submit"
-        disabled={!SUBMISSION_ENABLED}
-        aria-disabled={!SUBMISSION_ENABLED}
+        disabled={!SUBMISSION_ENABLED || status === 'submitting'}
+        aria-disabled={!SUBMISSION_ENABLED || status === 'submitting'}
         className="mt-6 flex min-h-[48px] w-full items-center justify-center rounded-control bg-forest text-ui-label text-cream transition-colors hover:bg-forest-hover disabled:cursor-not-allowed disabled:bg-line disabled:text-stone/60 disabled:hover:bg-line"
       >
-        Send message
+        {status === 'submitting' ? 'Sending…' : 'Send message'}
       </button>
 
       {!SUBMISSION_ENABLED ? (
         <p id="contact-form-disabled-note" className="mt-3 text-center text-caption text-stone/60">
           This form is not yet connected — submissions are disabled until it is.
+        </p>
+      ) : null}
+
+      {status === 'error' ? (
+        <p className="mt-3 text-center text-caption text-red-600">
+          Something went wrong sending your message — please try again, or email us directly.
         </p>
       ) : null}
     </form>

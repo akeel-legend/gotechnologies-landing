@@ -15,10 +15,10 @@ co-branding rules).
   (`output: 'export'` in `next.config.mjs`) — no server runtime required.
 - **Tailwind CSS** for styling, themed from the brand guideline's colour,
   typography and spacing tokens (`tailwind.config.ts`).
-- **Formspree** planned for the contact form (no backend, no secrets in
-  the repo) — not wired up yet. The form is fully built and fillable,
-  but submission is intentionally disabled until a real endpoint is
-  connected; see `components/ContactForm.tsx`.
+- **Formspree** powers the contact form (no backend, no secrets in the
+  repo) — POSTs client-side to `https://formspree.io/f/$NEXT_PUBLIC_FORMSPREE_FORM_ID`.
+  If that env var is unset, submission is automatically disabled with an
+  inline note; see `components/ContactForm.tsx`.
 - Optional **Plausible** or **GA4** analytics, opt-in via env var — the
   site ships with zero third-party scripts by default.
 
@@ -64,10 +64,11 @@ npm run typecheck    # tsc --noEmit
    - Header nav anchors scroll to the right sections and account for the
      sticky header (no heading hidden underneath it).
    - Mobile menu (resize below `md`) opens/closes and closes on link tap.
-   - Contact form: all fields should be fillable, but the "Send message"
-     button should render disabled/greyed out, with a small "This form is
-     not yet connected" note beneath it — that's expected until
-     `SUBMISSION_ENABLED` in `components/ContactForm.tsx` is flipped on.
+   - Contact form: all fields should be fillable. If
+     `NEXT_PUBLIC_FORMSPREE_FORM_ID` is set (see `.env.local`), "Send
+     message" submits to Formspree and shows a thank-you message. If
+     unset, the button renders disabled/greyed out with a "This form is
+     not yet connected" note beneath it.
 
 If anything fails to compile, paste the error back and it can be fixed
 directly — the component/config structure is intentionally small (see
@@ -130,12 +131,8 @@ docs/
   `href: '#'` for LinkedIn/Instagram/Facebook. No confirmed accounts exist
   yet; the icons are shown because the approved mockup includes them, but
   don't point them at guessed URLs — get the real ones from the team first.
-- **Contact form submission** — `SUBMISSION_ENABLED` in
-  `components/ContactForm.tsx` is hardcoded `false`. Flip it to `true`
-  once a real submit handler (Formspree or otherwise) is wired up and
-  tested — see that file's header comment.
-- **`NEXT_PUBLIC_FORMSPREE_FORM_ID`**, analytics vars, `NEXT_PUBLIC_SITE_URL`
-  — see "Environment variables" below.
+- Analytics vars, `NEXT_PUBLIC_SITE_URL` — see "Environment variables"
+  below.
 - `company.legalName` in `lib/site-config.ts` — confirm once a company
   registration number is available.
 
@@ -147,7 +144,7 @@ keys in your hosting provider's project settings for production.
 
 | Variable | Purpose | Required |
 |---|---|---|
-| `NEXT_PUBLIC_FORMSPREE_FORM_ID` | Contact form endpoint | Not yet used — submission is disabled at the component level regardless of this var; see "Placeholders to replace before launch" |
+| `NEXT_PUBLIC_FORMSPREE_FORM_ID` | Contact form endpoint | Recommended — submission is disabled if unset |
 | `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | Enables Plausible analytics | No |
 | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | Enables GA4 (used only if Plausible domain is unset) | No |
 | `NEXT_PUBLIC_SITE_URL` | Canonical URL for metadata/sitemap/OG tags | Recommended before launch |
@@ -173,24 +170,28 @@ keys in your hosting provider's project settings for production.
 Both targets work with the same static `out/` directory — this project
 deliberately avoids anything that needs a Node.js server at runtime.
 
-## Formspree setup (contact form) — not yet done
+## Formspree setup (contact form)
 
-The contact form (`components/ContactForm.tsx`) is fully built but
-**submission is intentionally disabled** (`SUBMISSION_ENABLED = false`)
-until it's connected to somewhere real. To wire it up:
+The contact form (`components/ContactForm.tsx`) is a client component
+that POSTs to `https://formspree.io/f/$NEXT_PUBLIC_FORMSPREE_FORM_ID` on
+submit, and shows a thank-you message or an inline error based on the
+response. If `NEXT_PUBLIC_FORMSPREE_FORM_ID` is unset, the submit button
+stays disabled with a "not yet connected" note.
+
+To set it up (or point it at a different form):
 
 1. Create a free form at [formspree.io](https://formspree.io) (or choose
    a different collection mechanism).
 2. Copy its form ID (the part after `/f/` in the endpoint) into
-   `NEXT_PUBLIC_FORMSPREE_FORM_ID`.
-3. Formspree's dashboard lets you set a redirect/notification email —
-   point it at whoever should triage traveller, partner, chauffeur and
-   investor enquiries.
-4. In `components/ContactForm.tsx`: set `SUBMISSION_ENABLED = true`,
-   mark the file `'use client'` again, and reinstate a submit handler
-   that POSTs to `https://formspree.io/f/${formId}` (see git history for
-   the version this was simplified from — search for "SUBMISSION_ENABLED"
-   in the file's own header comment for the pointer).
+   `NEXT_PUBLIC_FORMSPREE_FORM_ID` — in `.env.local` for dev, and in your
+   hosting provider's project env vars for production.
+3. Formspree's dashboard lets you set which email address submissions are
+   sent to (Form → Settings → General → "Send emails to"), and add more
+   recipients under Account → Linked Emails.
+4. Note: Formspree's Formshield spam filter treats submissions from
+   `localhost` as unrecognized and may route them to the form's Spam tab
+   instead of Inbox — this is expected in local dev and does not happen
+   from the real production domain.
 5. Re-run the "First-run checklist" and manually re-test the form.
 
 ## What's intentionally not here (Phase 1 scope)
